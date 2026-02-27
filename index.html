@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom practice</title>
+    <style>
+        .error{
+            color: red;
+        }
+       .success{
+            color: green;
+        }
+
+    </style>
+</head>
+<body>
+  <h1 id="title">Dom test</h1>
+  <p>tyuyu</p>
+    <form id="userForm">
+        <div>
+        <label for="">Name:</label>
+        <input type="text" id="nameInput">
+        </div>
+        <button type="submit">submit</button>
+    </form>
+    <div id="message"></div>
+    <button id="changeTitleBtn">Change Title</button>
+   
+
+    <script>
+        const title = document.getElementById('title')
+        const form = document.getElementById('userForm')
+        const nameInput = document.getElementById('nameInput')
+        const message = document.getElementById('message')
+        const changeTitleBtn = document.getElementById('changeTitleBtn')
+
+        changeTitleBtn.addEventListener("click", () =>{
+            title.textContent ="Title Changed!";
+            console.log ('Title was changed')
+        })
+        form.addEventListener('submit', (event) =>{
+            event.preventDefault()
+            const name = nameInput.value.trim()
+            
+
+            if(name ===""){
+            message.textContent = "Put your name ishie";
+            message.className = "error";
+            console.warn('form submitted with empty name');
+            return;
+        }
+        message.textContent = `Hello, ${name}!`;
+        message.className = "success";
+
+        console.log({name})
+    })
+    const isEven = (n) => {
+        return n % 2 === 0
+    }
+    let printMsg =(evenFunct, num)=> {
+        const IsNumEven = evenFunct(num);
+        console.log(`${num} is an even number:${IsNumEven}.`)
+    }
+     printMsg( isEven, 3)
+
+     const promise = new Promise((resolved, reject)=>{
+        const res =true
+        if(res){
+            resolved('Resolved')
+        } else{ 
+            reject(Error('Error'))
+        }
+     })
+     promise.then ((res) =>console.log(res), (err)=>console.error(err))
+ 
+     function HelloWorld (){
+        return new Promise(resolve =>{
+            setTimeout(()=>{
+                resolve('HelloWorld!');
+            }, 2000);
+        });
+     }
+     const msg = async function() {
+        const msg = await HelloWorld()
+        console.log ("message:", msg);
+     }
+     const msgl = async ()=>{
+        const msg = await HelloWorld();
+        console.log('message:',msg)
+     }
+     msg()
+     msgl()
+    </script>
+</body>
+</html>

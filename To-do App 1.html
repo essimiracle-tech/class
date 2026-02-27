@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do App</title>
+    <style>
+        *{ 
+            box-sizing: border-box;
+            margin: 0%;
+            padding: 0;
+        }
+        body{
+          height: 30px;
+          font-family: 'Courier New', Courier, monospace;
+        }
+        #ToDo-list{
+            list-style: none; padding: 0%;
+        }
+        #ToDo-list li{
+            padding: 10px; 
+            margin: 5px 0; 
+            background: #f0f0f0;
+            display: flex;
+            justify-content: center;
+        }
+       #joint-btn{margin: 10px;
+         }
+
+    </style>
+</head>
+<body>
+        <h1>To Do App</h1>
+        <input type="text" id="To-Do input" placeholder="Input a task">
+        <button id="joint-btn">Join</button>
+        <ul id="ToDo-list"></ul>
+   <script>
+    const input= document.getElementById('To-Do input');
+    const jointBtn = document.getElementById('joint-btn');
+    const toDoList= document.getElementById('ToDo-list');
+
+    jointBtn.addEventListener('click', () =>{
+        const task = input.value.trim();
+        if(task!==""){
+            putTask(task);
+            input.value = "";
+        }
+    });
+    function putTask(task){
+        const li = document.createElement('li');
+        li.textContent = task;
+    
+        const deleteBtn = document.createElement('button');
+        deleteBtn.textContent = "Delete";
+        deleteBtn.onclick = () => li.remove();
+
+        const completeBtn = document.createElement('button');
+        completeBtn.textContent = "Completed";
+        completeBtn.onclick = () => li.style.textDecoration = 'line-through';
+
+        li.appendChild (completeBtn); 
+        li.appendChild (deleteBtn);
+        toDoList.appendChild(li);
+    }
+
+   </script>
+</body>
+</html>
